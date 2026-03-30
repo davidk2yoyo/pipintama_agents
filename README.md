@@ -1,19 +1,13 @@
 # Pipintama Agents
 
-Public agent-facing documentation for Pipintama Boards.
+Documentation for humans and agents that want to use Pipintama Boards through the hosted MCP.
 
-This repo is intentionally narrow:
+Here you can read:
 
-- MCP endpoint reference
-- reusable skill instructions
-- integration notes for agent systems such as OpenClaw
-
-It does **not** contain:
-
-- VPS credentials
-- SiteGround credentials
-- deployment secrets
-- private infrastructure implementation details
+- what the MCP endpoint is
+- how the Pipintama Boards skill works
+- how an agent such as OpenClaw should use the tools
+- which board modes are supported and when to choose them
 
 ## Live endpoints
 
@@ -31,9 +25,9 @@ It does **not** contain:
 
 ## Core idea
 
-Agents should not depend on the Pipintama codebase.
+Pipintama Boards is meant to be consumed as a hosted capability.
 
-They should:
+An agent should:
 
 1. read the skill
 2. connect to the hosted MCP endpoint
