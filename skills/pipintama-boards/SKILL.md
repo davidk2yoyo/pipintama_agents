@@ -22,6 +22,8 @@ Primary tools:
 - `get_board`
 - `share_board`
 - `set_board_visibility`
+- `update_board`
+- `export_board_png`
 
 Default workspace for demos:
 
@@ -162,6 +164,49 @@ Use this when a board should be opened through a tokenized share link.
 
 Use this when the user explicitly asks to make a board private, shared, or public.
 
+### `update_board`
+
+Use this when the user wants to refine an existing board instead of creating a new one.
+
+Typical cases:
+
+- add or remove branches
+- change the board title
+- convert a board from one mode to another
+- regenerate the board from improved source text
+- make the board public, shared, or private while updating it
+
+Expected inputs:
+
+```json
+{
+  "board_id": "cmndns0hn0001o401md5okzju",
+  "board_type": "flowchart",
+  "source_text": "User submits request. Validate request. If valid, create the board. If invalid, ask for correction.",
+  "note": "Tighten the wording and preserve yes/no branching."
+}
+```
+
+### `export_board_png`
+
+Use this when the user needs an actual image file instead of only a hosted link.
+
+Typical cases:
+
+- Telegram
+- WhatsApp
+- quick previews in chat
+- channels where an image is more useful than a URL alone
+
+Expected inputs:
+
+```json
+{
+  "board_id": "cmndns0hn0001o401md5okzju",
+  "theme": "light"
+}
+```
+
 ## Output format
 
 Default output:
@@ -169,11 +214,13 @@ Default output:
 1. hosted viewer URL
 2. one short explanation sentence
 
-Optional raw output only when explicitly requested:
+If the channel supports images and visual attachments are useful:
 
-- board metadata
-- `sceneJson`
-- visibility or share token details
+1. hosted viewer URL
+2. PNG export URL
+3. one short explanation sentence
+
+Only return raw `sceneJson` when the user explicitly asks for raw data.
 
 Good response pattern:
 
@@ -184,19 +231,29 @@ https://boards.pipintama.com/b/<board-id>?t=<share-token>
 It includes the intake step, validation step, and yes/no branching for success vs correction.
 ```
 
+Image-friendly pattern:
+
+```text
+I created the board and exported a PNG for easy sharing:
+Viewer: https://boards.pipintama.com/b/<board-id>?t=<share-token>
+PNG: https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light
+```
+
 ## Guardrails
 
-- avoid flat list thinking when the task needs hierarchy
-- avoid choosing a board type just because the user used the word “diagram”
-- avoid public boards unless the user explicitly asks for an open link
-- avoid returning raw JSON first when a hosted viewer URL is more useful
-- prioritize clarity over completeness inside node text
-- keep titles concise and useful
-- do not invent capabilities that do not exist yet
+- do not choose `architecture` for a human workflow
+- do not choose `kanban` for concept exploration
+- do not make boards public unless asked
+- do not dump raw JSON first when a hosted link is more useful
+- use `update_board` when the user wants to refine an existing board instead of creating a new one
+- use `export_board_png` when the channel benefits from an image attachment
+- keep titles concise
+- prioritize clarity over completeness in node text
 
 ## Current limits
 
-- exports are not implemented yet
-- editing existing boards is not implemented yet
+- PNG export is implemented through `export_board_png`
+- agent-driven board updates are implemented through `update_board`
+- direct human editing in the browser is not implemented yet
 - auth is still basic, so shared links are preferred
 - generation is structured but still improving by mode

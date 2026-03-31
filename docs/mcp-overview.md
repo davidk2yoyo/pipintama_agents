@@ -46,6 +46,37 @@ Switch a board into shared mode and return the tokenized viewer URL.
 
 Change a board to `private`, `shared`, or `public`.
 
+### `update_board`
+
+Refine an existing board without creating a new board id.
+
+Input shape:
+
+```json
+{
+  "board_id": "cmndns0hn0001o401md5okzju",
+  "board_type": "flowchart",
+  "source_text": "User submits request. Validate request. If valid, create the board. If invalid, ask for correction.",
+  "note": "Tighten the wording and preserve yes/no branching."
+}
+```
+
+### `export_board_png`
+
+Return a PNG export URL when the channel needs an image as well as a hosted link.
+
+Output shape:
+
+```json
+{
+  "ok": true,
+  "board_id": "cmndns0hn0001o401md5okzju",
+  "viewer_url": "https://boards.pipintama.com/b/cmndns0hn0001o401md5okzju",
+  "png_url": "https://api.pipintama.com/mcp-exports/cmndns0hn0001o401md5okzju.png?theme=light",
+  "theme": "light"
+}
+```
+
 ## Board modes
 
 - `mindmap`: concepts, brainstorming, topic exploration
@@ -64,6 +95,7 @@ Change a board to `private`, `shared`, or `public`.
 Prefer returning:
 
 1. the hosted viewer link
-2. one short sentence explaining what the board contains
+2. the PNG export URL when the channel benefits from an image
+3. one short sentence explaining what the board contains
 
 Avoid returning raw JSON unless the user asks for it explicitly.
