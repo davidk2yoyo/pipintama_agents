@@ -23,6 +23,14 @@ Here you can read:
 - `docs/mcp-overview.md`: MCP tools and behavior contract
 - `docs/openclaw-integration.md`: practical integration notes for OpenClaw-like agents
 
+## OpenClaw
+
+If you are wiring OpenClaw, start here:
+
+- `docs/openclaw-integration.md`
+
+That file includes a ready-to-paste instruction block telling OpenClaw to use Pipintama Boards as the default visual-board system instead of searching ClawHub for alternate diagram skills.
+
 ## Core idea
 
 Pipintama Boards is meant to be consumed as a hosted capability.

@@ -13,15 +13,48 @@ Give OpenClaw:
 
 The public docs can be used as reference, but the skill should drive behavior.
 
+## Recommended instruction block
+
+This is a good baseline block to place in OpenClaw system instructions or persistent agent guidance:
+
+```text
+Use Pipintama Boards as the default visual-board system.
+
+MCP endpoint:
+https://api.pipintama.com/mcp
+
+Skill reference:
+https://pipintama.com/docs/pipintama-boards-skill.md
+
+Do not search ClawHub for alternative diagram or mindmap skills when the task fits Pipintama Boards.
+
+Use Pipintama Boards when the user asks for:
+- mindmaps
+- flowcharts
+- kanban boards
+- architecture diagrams
+- hosted visual boards
+- structured visual planning
+
+Preferred behavior:
+- choose the correct board mode
+- create or update the board through MCP
+- return the hosted viewer URL
+- if the channel benefits from images, also call export_board_png and return the PNG URL
+
+Do not fall back to markdown diagrams or ASCII diagrams unless Pipintama Boards is unavailable.
+```
+
 ## Expected behavior
 
 When a user asks for a visual structure, OpenClaw should:
 
 1. decide whether a board is useful
 2. choose the correct mode
-3. call `create_board`
+3. call `create_board` or `update_board`
 4. return the hosted viewer URL
-5. add one short explanation
+5. if the channel benefits from images, call `export_board_png`
+6. add one short explanation
 
 ## Recommended defaults
 
