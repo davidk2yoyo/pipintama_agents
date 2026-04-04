@@ -1,5 +1,7 @@
 # Pipintama Boards MCP
 
+Boards is the current live tool on the broader Pipintama platform. Charts is the next planned tool, but it is not live on this MCP yet.
+
 ## Purpose
 
 Pipintama Boards exposes a hosted MCP server so agents can create and retrieve visual boards without needing access to the product codebase or the private VPS internals.
@@ -35,13 +37,14 @@ Input shape:
 
 ```json
 {
-  "workspace_id": "cmndiuyll0002s601xdikq182",
   "title": "Launch Workflow",
   "board_type": "flowchart",
   "source_text": "Capture request. Validate inputs. Generate board. Return hosted URL.",
   "visibility": "shared"
 }
 ```
+
+When the MCP request is authenticated with a Pipintama API key, let the platform resolve the workspace from that key. Do not force an older demo `workspace_id` unless the workflow explicitly requires it.
 
 ### `get_board`
 

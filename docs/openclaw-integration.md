@@ -46,6 +46,10 @@ Preferred behavior:
 - return the hosted viewer URL
 - if the channel benefits from images, also call export_board_png and return the PNG URL
 
+Workspace rule:
+- do not pass workspace_id explicitly unless the user gives one
+- let the authenticated Pipintama API key determine the workspace
+
 Do not fall back to markdown diagrams or ASCII diagrams unless Pipintama Boards is unavailable.
 ```
 
@@ -63,7 +67,6 @@ When a user asks for a visual structure, OpenClaw should:
 ## Recommended defaults
 
 - default visibility: `shared`
-- default workspace: `cmndiuyll0002s601xdikq182`
 - prefer concise titles
 - preserve the user's language in `source_text`
 - do not attempt anonymous MCP access; authenticate first

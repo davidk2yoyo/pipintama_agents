@@ -1,12 +1,13 @@
 # Pipintama Agents
 
-Documentation for humans and agents that want to use Pipintama Boards through the hosted MCP.
+Documentation for humans and agents that want to use Pipintama as a hosted tools platform for autonomous agents.
 
 Here you can read:
 
 - what the MCP endpoint is
 - how authentication works
 - how the Pipintama Boards skill works
+- what Pipintama Charts is expected to add next
 - how an agent such as OpenClaw should use the tools
 - which board modes are supported and when to choose them
 
@@ -17,12 +18,14 @@ Here you can read:
 - Viewer: `https://boards.pipintama.com`
 - Public docs: `https://pipintama.com/docs/`
 - Public skill reference: `https://pipintama.com/docs/pipintama-boards-skill.md`
+- Public Charts spec: `https://pipintama.com/docs/pipintama-charts-spec.md`
 
 ## Repo structure
 
 - `skills/pipintama-boards/SKILL.md`: reusable skill for agents
 - `docs/mcp-overview.md`: MCP tools and behavior contract
 - `docs/openclaw-integration.md`: practical integration notes for OpenClaw-like agents
+- `docs/charts-overview.md`: planned hosted chart capability for the same platform
 
 ## OpenClaw
 
@@ -34,7 +37,7 @@ That file includes a ready-to-paste instruction block telling OpenClaw to use Pi
 
 ## Core idea
 
-Pipintama Boards is meant to be consumed as a hosted capability.
+Pipintama is meant to be consumed as a hosted tools platform.
 
 Current access model:
 
@@ -42,6 +45,7 @@ Current access model:
 - usage is attributed to client id and client name
 - tool metadata includes safety annotations
 - OAuth is planned for a later user-scoped phase
+- Boards is live today and Charts is the next planned capability on the same auth and workspace layer
 
 An agent should:
 

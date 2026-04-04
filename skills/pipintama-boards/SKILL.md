@@ -31,10 +31,6 @@ Primary tools:
 - `update_board`
 - `export_board_png`
 
-Default workspace for demos:
-
-- `cmndiuyll0002s601xdikq182`
-
 ## When to use this skill
 
 Use Boards when the user asks for:
@@ -59,9 +55,10 @@ Do not use Boards when:
 3. Build a concise board title.
 4. Preserve the user intent in `source_text` instead of rewriting the task into something unrelated.
 5. Default visibility to `shared` unless the user explicitly wants `public` or `private`.
-6. Call the MCP tool that matches the job.
-7. Return the hosted viewer URL first.
-8. Add one short sentence explaining what the board contains.
+6. Do not pass `workspace_id` unless the user explicitly provides one. Let the authenticated API key determine the workspace.
+7. Call the MCP tool that matches the job.
+8. Return the hosted viewer URL first.
+9. Add one short sentence explaining what the board contains.
 
 ## Mode selection
 
@@ -150,7 +147,6 @@ Expected inputs:
 
 ```json
 {
-  "workspace_id": "cmndiuyll0002s601xdikq182",
   "title": "Approval Flow",
   "board_type": "flowchart",
   "source_text": "User submits a request. System validates the payload. If the request is valid, create the board and notify the user. If the request is invalid, return an error and ask for correction.",
