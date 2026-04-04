@@ -85,6 +85,28 @@ https://boards.pipintama.com/b/<board-id>?t=<share-token>
 It includes intake, validation, and branching for approval vs correction.
 ```
 
+If the channel benefits from images, OpenClaw should call `export_board_png` and respond with something like:
+
+```text
+I created the flowchart and exported a PNG for easy sharing:
+Viewer: https://boards.pipintama.com/b/<board-id>?t=<share-token>
+PNG: https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light
+```
+
+## URL rules
+
+Only return URL formats that Pipintama actually serves today:
+
+- viewer: `https://boards.pipintama.com/b/<board-id>` or `?t=<share-token>`
+- PNG: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
+
+Do not invent or rewrite these into other domains or routes.
+
+Wrong examples:
+
+- `https://pipintama.com/board/<board-id>`
+- `https://cdn.pipintama.com/boards/<board-id>/export.png`
+
 ## What not to do
 
 - do not ask the user to browse the repo
@@ -92,3 +114,4 @@ It includes intake, validation, and branching for approval vs correction.
 - do not return raw board JSON first when a hosted link is more useful
 - do not make boards public unless the user explicitly asks for that
 - do not silently fall back to ASCII or markdown diagrams when Pipintama access is available
+- do not fabricate Pipintama URLs that the platform does not serve

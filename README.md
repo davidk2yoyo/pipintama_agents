@@ -50,6 +50,20 @@ An agent should:
 3. create or fetch boards through MCP tools
 4. return hosted viewer links to users
 
+## Response format
+
+Agents should return real Pipintama URLs only.
+
+Valid URL patterns today:
+
+- viewer: `https://boards.pipintama.com/b/<board-id>` or `https://boards.pipintama.com/b/<board-id>?t=<share-token>`
+- PNG export: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
+
+Do not invent unsupported routes such as:
+
+- `https://pipintama.com/board/<board-id>`
+- `https://cdn.pipintama.com/boards/<board-id>/export.png`
+
 ## Support and public docs
 
 - Public docs: `https://pipintama.com/docs/`

@@ -245,6 +245,19 @@ Viewer: https://boards.pipintama.com/b/<board-id>?t=<share-token>
 PNG: https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light
 ```
 
+Only use live Pipintama URL patterns.
+
+Valid:
+
+- `https://boards.pipintama.com/b/<board-id>`
+- `https://boards.pipintama.com/b/<board-id>?t=<share-token>`
+- `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
+
+Invalid:
+
+- `https://pipintama.com/board/<board-id>`
+- `https://cdn.pipintama.com/boards/<board-id>/export.png`
+
 ## Guardrails
 
 - do not choose `architecture` for a human workflow
@@ -255,6 +268,7 @@ PNG: https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light
 - use `export_board_png` when the channel benefits from an image attachment
 - keep titles concise
 - prioritize clarity over completeness in node text
+- never fabricate Pipintama URLs; return only viewer and PNG URLs that match the live platform
 
 ## Current limits
 
