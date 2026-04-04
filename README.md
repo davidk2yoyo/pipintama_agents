@@ -5,6 +5,7 @@ Documentation for humans and agents that want to use Pipintama Boards through th
 Here you can read:
 
 - what the MCP endpoint is
+- how authentication works
 - how the Pipintama Boards skill works
 - how an agent such as OpenClaw should use the tools
 - which board modes are supported and when to choose them
@@ -35,9 +36,22 @@ That file includes a ready-to-paste instruction block telling OpenClaw to use Pi
 
 Pipintama Boards is meant to be consumed as a hosted capability.
 
+Current access model:
+
+- remote MCP clients authenticate with API keys
+- usage is attributed to client id and client name
+- tool metadata includes safety annotations
+- OAuth is planned for a later user-scoped phase
+
 An agent should:
 
 1. read the skill
 2. connect to the hosted MCP endpoint
 3. create or fetch boards through MCP tools
 4. return hosted viewer links to users
+
+## Support and public docs
+
+- Public docs: `https://pipintama.com/docs/`
+- Public skill: `https://pipintama.com/docs/pipintama-boards-skill.md`
+- Support entry point: `https://pipintama.com/contact/`

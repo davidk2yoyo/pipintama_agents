@@ -11,6 +11,12 @@ Primary MCP endpoint:
 
 - `https://api.pipintama.com/mcp`
 
+Access model:
+
+- this hosted MCP requires a valid Pipintama API key
+- clients should provide it through `Authorization: Bearer <key>` or `x-api-key`
+- usage is attributed to the authenticated client, not only the IP address
+
 Health check:
 
 - `https://api.pipintama.com/mcp-health`
@@ -255,5 +261,5 @@ PNG: https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light
 - PNG export is implemented through `export_board_png`
 - agent-driven board updates are implemented through `update_board`
 - direct human editing in the browser is not implemented yet
-- auth is still basic, so shared links are preferred
+- access is controlled with API keys; OAuth is a later roadmap item
 - generation is structured but still improving by mode

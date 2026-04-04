@@ -12,6 +12,15 @@ Health check:
 
 - `https://api.pipintama.com/mcp-health`
 
+## Authentication
+
+The hosted MCP is not anonymous.
+
+- remote clients authenticate with a Pipintama API key
+- clients can send it through `Authorization: Bearer <key>` or `x-api-key`
+- usage is attributed to the authenticated client id and name
+- OAuth is planned later for user-scoped access across multiple Pipintama tools
+
 ## Supported tools
 
 ### `list_board_modes`
@@ -99,3 +108,12 @@ Prefer returning:
 3. one short sentence explaining what the board contains
 
 Avoid returning raw JSON unless the user asks for it explicitly.
+
+## Safety metadata
+
+The hosted MCP publishes tool annotations so clients can reason about safer defaults:
+
+- `readOnlyHint`
+- `destructiveHint`
+- `idempotentHint`
+- `openWorldHint`
