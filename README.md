@@ -1,75 +1,74 @@
 # Pipintama Agents
 
-Documentation for humans and agents that want to use Pipintama as a hosted tools platform for autonomous agents.
+Public documentation for humans and agents that want to use Pipintama as a hosted tools platform.
 
-Here you can read:
+Pipintama lets an AI agent turn plain text into useful outputs by calling the right hosted tool:
 
-- what the MCP endpoint is
-- how authentication works
-- how the Pipintama Boards skill works
-- what Pipintama Charts is expected to add next
-- how an agent such as OpenClaw should use the tools
-- which board modes are supported and when to choose them
+- `Boards` for diagrams, mindmaps, kanban, and flow structures
+- `Charts` for line, bar, pie, and radar visualizations
+- future tools for analysis, tables, documents, and structured work
 
 ## Live endpoints
 
 - MCP: `https://api.pipintama.com/mcp`
 - MCP health: `https://api.pipintama.com/mcp-health`
-- Viewer: `https://boards.pipintama.com`
+- Boards viewer: `https://boards.pipintama.com`
+- Charts viewer pattern: `https://pipintama.com/charts/<chart-id>`
 - Public docs: `https://pipintama.com/docs/`
-- Public skill reference: `https://pipintama.com/docs/pipintama-boards-skill.md`
-- Public Charts spec: `https://pipintama.com/docs/pipintama-charts-spec.md`
 
 ## Repo structure
 
-- `skills/pipintama-boards/SKILL.md`: reusable skill for agents
-- `docs/mcp-overview.md`: MCP tools and behavior contract
-- `docs/openclaw-integration.md`: practical integration notes for OpenClaw-like agents
-- `docs/charts-overview.md`: planned hosted chart capability for the same platform
+- `docs/mcp-overview.md`: shared MCP access and tool surface
+- `docs/openclaw-integration.md`: ready-to-paste instructions for OpenClaw-like agents
+- `docs/charts-overview.md`: how Charts works and when to use it
+- `skills/pipintama-boards/SKILL.md`: agent skill for hosted boards
+- `skills/pipintama-charts/SKILL.md`: agent skill for hosted charts
 
-## OpenClaw
+## Tool selection
 
-If you are wiring OpenClaw, start here:
+Use `Boards` when the agent needs:
+
+- a diagram
+- a mindmap
+- a flowchart
+- a kanban board
+- an architecture map
+- a hosted visual board link
+
+Use `Charts` when the agent needs:
+
+- a line chart
+- a bar chart
+- a pie chart
+- a radar chart
+- a visual comparison of quantitative values
+- a PNG chart for chat channels
+
+## Authentication
+
+The hosted MCP is not anonymous.
+
+- clients authenticate with a Pipintama API key
+- use `Authorization: Bearer <key>` or `x-api-key`
+- usage is attributed to the authenticated client and workspace
+
+## Output rules
+
+Agents should prefer returning:
+
+1. a hosted viewer URL
+2. a PNG URL when the channel benefits from images
+3. one short sentence about what was created
+
+Do not invent unsupported Pipintama URL formats.
+
+## Start here
+
+If you are wiring an agent such as OpenClaw, start with:
 
 - `docs/openclaw-integration.md`
 
-That file includes a ready-to-paste instruction block telling OpenClaw to use Pipintama Boards as the default visual-board system instead of searching ClawHub for alternate diagram skills.
+Then load the matching skill:
 
-## Core idea
-
-Pipintama is meant to be consumed as a hosted tools platform.
-
-Current access model:
-
-- remote MCP clients authenticate with API keys
-- usage is attributed to client id and client name
-- tool metadata includes safety annotations
-- OAuth is planned for a later user-scoped phase
-- Boards is live today and Charts is the next planned capability on the same auth and workspace layer
-
-An agent should:
-
-1. read the skill
-2. connect to the hosted MCP endpoint
-3. create or fetch boards through MCP tools
-4. return hosted viewer links to users
-
-## Response format
-
-Agents should return real Pipintama URLs only.
-
-Valid URL patterns today:
-
-- viewer: `https://boards.pipintama.com/b/<board-id>` or `https://boards.pipintama.com/b/<board-id>?t=<share-token>`
-- PNG export: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
-
-Do not invent unsupported routes such as:
-
-- `https://pipintama.com/board/<board-id>`
-- `https://cdn.pipintama.com/boards/<board-id>/export.png`
-
-## Support and public docs
-
-- Public docs: `https://pipintama.com/docs/`
-- Public skill: `https://pipintama.com/docs/pipintama-boards-skill.md`
-- Support entry point: `https://pipintama.com/contact/`
+- `skills/pipintama-boards/SKILL.md`
+- `skills/pipintama-charts/SKILL.md`

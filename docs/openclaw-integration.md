@@ -2,14 +2,16 @@
 
 ## Goal
 
-OpenClaw should use Pipintama Boards through the hosted MCP endpoint, not through hardcoded Telegram-only logic.
+OpenClaw should use Pipintama through the hosted MCP endpoint, not through hardcoded Telegram-only logic or fallback ASCII renderers.
 
 ## Recommended setup
 
 Give OpenClaw:
 
 1. MCP access to `https://api.pipintama.com/mcp`
-2. the Pipintama Boards skill from `skills/pipintama-boards/SKILL.md`
+2. the Pipintama skills from:
+   - `skills/pipintama-boards/SKILL.md`
+   - `skills/pipintama-charts/SKILL.md`
 3. a valid Pipintama API key supplied through `Authorization: Bearer <key>` or `x-api-key`
 
 The public docs can be used as reference, but the skill should drive behavior.
@@ -19,18 +21,19 @@ The public docs can be used as reference, but the skill should drive behavior.
 This is a good baseline block to place in OpenClaw system instructions or persistent agent guidance:
 
 ```text
-Use Pipintama Boards as the default visual-board system.
+Use Pipintama as the default visual output system.
 
 MCP endpoint:
 https://api.pipintama.com/mcp
 
 Skill reference:
 https://pipintama.com/docs/pipintama-boards-skill.md
+https://pipintama.com/docs/pipintama-charts-spec.md
 
 Authentication:
 Send a valid Pipintama API key with each MCP request.
 
-Do not search ClawHub for alternative diagram or mindmap skills when the task fits Pipintama Boards.
+Do not search ClawHub for alternative diagram or chart skills when the task fits Pipintama.
 
 Use Pipintama Boards when the user asks for:
 - mindmaps
@@ -40,28 +43,38 @@ Use Pipintama Boards when the user asks for:
 - hosted visual boards
 - structured visual planning
 
+Use Pipintama Charts when the user asks for:
+- line charts
+- bar charts
+- pie charts
+- radar charts
+- text to chart
+- AI data visualization
+- visual comparisons of quantitative values
+
 Preferred behavior:
-- choose the correct board mode
-- create or update the board through MCP
+- choose the correct Pipintama tool first
+- choose the correct mode within that tool
+- create or update the board or chart through MCP
 - return the hosted viewer URL
-- if the channel benefits from images, also call export_board_png and return the PNG URL
+- if the channel benefits from images, also call the matching export tool and return the PNG URL
 
 Workspace rule:
 - do not pass workspace_id explicitly unless the user gives one
 - let the authenticated Pipintama API key determine the workspace
 
-Do not fall back to markdown diagrams or ASCII diagrams unless Pipintama Boards is unavailable.
+Do not fall back to markdown diagrams, ASCII diagrams, or fake chart URLs unless Pipintama is unavailable.
 ```
 
 ## Expected behavior
 
-When a user asks for a visual structure, OpenClaw should:
+When a user asks for a visual structure or quantitative chart, OpenClaw should:
 
-1. decide whether a board is useful
+1. decide whether the request fits Boards or Charts
 2. choose the correct mode
-3. call `create_board` or `update_board`
+3. call the matching create or update tool
 4. return the hosted viewer URL
-5. if the channel benefits from images, call `export_board_png`
+5. if the channel benefits from images, call the matching PNG export tool
 6. add one short explanation
 
 ## Recommended defaults
@@ -88,7 +101,7 @@ https://boards.pipintama.com/b/<board-id>?t=<share-token>
 It includes intake, validation, and branching for approval vs correction.
 ```
 
-If the channel benefits from images, OpenClaw should call `export_board_png` and respond with something like:
+If the channel benefits from images, OpenClaw should call `export_board_png` or `export_chart_png` and respond with something like:
 
 ```text
 I created the flowchart and exported a PNG for easy sharing:
@@ -102,6 +115,8 @@ Only return URL formats that Pipintama actually serves today:
 
 - viewer: `https://boards.pipintama.com/b/<board-id>` or `?t=<share-token>`
 - PNG: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
+- chart viewer: `https://pipintama.com/charts/<chart-id>` or `?t=<share-token>`
+- chart PNG: `https://api.pipintama.com/mcp-chart-exports/<chart-id>.png?theme=light`
 
 Do not invent or rewrite these into other domains or routes.
 

@@ -1,10 +1,10 @@
-# Pipintama Boards MCP
+# Pipintama MCP Overview
 
-Boards is the current live tool on the broader Pipintama platform. Charts is the next planned tool, but it is not live on this MCP yet.
+Pipintama exposes one hosted MCP endpoint that currently serves both `Boards` and `Charts`.
 
 ## Purpose
 
-Pipintama Boards exposes a hosted MCP server so agents can create and retrieve visual boards without needing access to the product codebase or the private VPS internals.
+Pipintama exposes a hosted MCP server so agents can create and retrieve visual outputs without needing access to the product codebase or private VPS internals.
 
 Live endpoint:
 
@@ -24,6 +24,8 @@ The hosted MCP is not anonymous.
 - OAuth is planned later for user-scoped access across multiple Pipintama tools
 
 ## Supported tools
+
+### Board tools
 
 ### `list_board_modes`
 
@@ -89,12 +91,72 @@ Output shape:
 }
 ```
 
+### Chart tools
+
+### `list_chart_modes`
+
+Return the supported chart types and when to use each one.
+
+### `create_chart`
+
+Create a chart from text or structured values and return a hosted viewer URL.
+
+Input shape:
+
+```json
+{
+  "title": "Weekly Active Agents",
+  "chart_type": "line",
+  "source_text": "Mon: 12\nTue: 18\nWed: 15\nThu: 22\nFri: 28",
+  "visibility": "shared"
+}
+```
+
+### `get_chart`
+
+Fetch chart metadata, configuration, and hosted viewer URL.
+
+### `share_chart`
+
+Switch a chart into shared mode and return the tokenized viewer URL.
+
+### `set_chart_visibility`
+
+Change a chart to `private`, `shared`, or `public`.
+
+### `update_chart`
+
+Refine an existing chart without creating a new chart id.
+
+### `export_chart_png`
+
+Return a PNG export URL when the channel needs an image as well as a hosted link.
+
+Output shape:
+
+```json
+{
+  "ok": true,
+  "chart_id": "cmnkxiet60013nu016w086rx2",
+  "viewer_url": "https://pipintama.com/charts/cmnkxiet60013nu016w086rx2",
+  "png_url": "https://api.pipintama.com/mcp-chart-exports/cmnkxiet60013nu016w086rx2.png?theme=light",
+  "theme": "light"
+}
+```
+
 ## Board modes
 
 - `mindmap`: concepts, brainstorming, topic exploration
 - `flowchart`: processes, approvals, branching logic
 - `kanban`: tasks grouped by stage or status
 - `architecture`: systems, services, integrations, dependencies
+
+## Chart modes
+
+- `line`: trends over time
+- `bar`: category comparison
+- `pie`: part-to-whole distribution
+- `radar`: multidimensional profile comparison
 
 ## Visibility guidance
 
@@ -108,7 +170,7 @@ Prefer returning:
 
 1. the hosted viewer link
 2. the PNG export URL when the channel benefits from an image
-3. one short sentence explaining what the board contains
+3. one short sentence explaining what the output contains
 
 Avoid returning raw JSON unless the user asks for it explicitly.
 

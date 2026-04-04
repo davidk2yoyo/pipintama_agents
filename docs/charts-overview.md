@@ -1,56 +1,55 @@
 # Pipintama Charts Overview
 
-Pipintama Charts is the next planned hosted tool after Boards.
+Pipintama Charts is live on the same hosted MCP stack as Boards.
 
-## Why it exists
+## What it does
 
-Boards is for structure:
+Charts lets an agent turn plain text or structured values into visual outputs such as:
 
-- mindmaps
-- flowcharts
-- kanban boards
-- architecture maps
+- `line` charts for trends
+- `bar` charts for comparisons
+- `pie` charts for distribution
+- `radar` charts for profile comparison
 
-Charts is for quantitative views:
+## When to use Charts
 
-- comparisons
-- trends
-- percentages
-- multidimensional profiles
+Use Charts when the user asks for:
 
-## Proposed MVP
+- a chart from text
+- an AI chart generator
+- a visual comparison of categories
+- trend lines from time or sequence data
+- shareable chart images for Telegram, WhatsApp, or similar channels
 
-Renderer:
+Do not use Charts when the user really needs:
 
-- `Chart.js`
+- a process diagram
+- a mindmap
+- a kanban board
+- a system map
 
-Chart types:
-
-- `line`
-- `bar`
-- `pie`
-- `radar`
-
-## Expected MCP Surface
-
-- `list_chart_modes`
-- `create_chart`
-- `get_chart`
-- `update_chart`
-- `share_chart`
-- `set_chart_visibility`
-- `export_chart_png`
+Those belong in `Boards`.
 
 ## Shared platform rules
 
-Charts should reuse the same Pipintama platform layer as Boards:
+Charts reuses the same Pipintama platform layer as Boards:
 
 - workspaces
 - API keys
 - usage attribution
-- MCP access
+- hosted MCP access
 - PNG exports
 - future OAuth
+
+## Live MCP tools
+
+- `list_chart_modes`
+- `create_chart`
+- `get_chart`
+- `share_chart`
+- `set_chart_visibility`
+- `update_chart`
+- `export_chart_png`
 
 ## Output expectation
 
@@ -59,6 +58,15 @@ Agents should prefer returning:
 1. `viewer_url`
 2. `png_url` when the channel benefits from images
 3. one short sentence explaining the chart
+
+## Viewer patterns
+
+- `https://pipintama.com/charts/<chart-id>`
+- `https://pipintama.com/charts/<chart-id>?t=<share-token>`
+
+PNG export pattern:
+
+- `https://api.pipintama.com/mcp-chart-exports/<chart-id>.png?theme=light`
 
 ## Public reference
 
