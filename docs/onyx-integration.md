@@ -42,6 +42,15 @@ For each tool family:
 - create an Onyx agent
 - enable the Pipintama action for that agent
 
+## OpenAPI schema definitions
+
+Use separate schema definitions for each tool family.
+
+- Charts schema:
+  - `https://pipintama.com/docs/pipintama-onyx-charts-openapi.json`
+- Boards schema:
+  - `https://pipintama.com/docs/pipintama-onyx-boards-openapi.json`
+
 ## Recommended scope
 
 Use separate actions or at least clearly separated tool families:
