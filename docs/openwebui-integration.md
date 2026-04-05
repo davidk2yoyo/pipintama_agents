@@ -30,6 +30,17 @@ Authenticate with:
    - `API Key`: your Pipintama API key
 6. Save the connection
 
+## Use separate skills
+
+Do not mix all Pipintama behavior into one huge prompt.
+
+Use one instruction block or skill per tool:
+
+- `docs/openwebui-boards-skill.md`
+- `docs/openwebui-charts-skill.md`
+
+That reduces fake routes, wrong output formats, and wrong tool selection.
+
 ## What this gives you
 
 Boards:
