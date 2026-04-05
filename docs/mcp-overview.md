@@ -2,6 +2,10 @@
 
 Pipintama exposes one hosted MCP endpoint that currently serves both `Boards` and `Charts`.
 
+For clients that behave more reliably with OpenAPI than MCP, Pipintama also exposes:
+
+- `https://api.pipintama.com/openapi.json`
+
 ## Purpose
 
 Pipintama exposes a hosted MCP server so agents can create and retrieve visual outputs without needing access to the product codebase or private VPS internals.

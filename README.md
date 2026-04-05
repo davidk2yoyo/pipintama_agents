@@ -12,6 +12,7 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 
 - MCP: `https://api.pipintama.com/mcp`
 - MCP health: `https://api.pipintama.com/mcp-health`
+- OpenAPI spec: `https://api.pipintama.com/openapi.json`
 - Boards viewer: `https://boards.pipintama.com`
 - Charts viewer pattern: `https://pipintama.com/charts/<chart-id>`
 - Public docs: `https://pipintama.com/docs/`
@@ -20,6 +21,7 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 
 - `docs/mcp-overview.md`: shared MCP access and tool surface
 - `docs/openclaw-integration.md`: ready-to-paste instructions for OpenClaw-like agents
+- `docs/openwebui-integration.md`: OpenAPI path for OpenWebUI
 - `docs/charts-overview.md`: how Charts works and when to use it
 - `skills/pipintama-boards/SKILL.md`: agent skill for hosted boards
 - `skills/pipintama-charts/SKILL.md`: agent skill for hosted charts
@@ -67,6 +69,10 @@ Do not invent unsupported Pipintama URL formats.
 If you are wiring an agent such as OpenClaw, start with:
 
 - `docs/openclaw-integration.md`
+
+If you are wiring OpenWebUI, start with:
+
+- `docs/openwebui-integration.md`
 
 Then load the matching skill:
 
