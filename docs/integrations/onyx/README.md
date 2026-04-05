@@ -47,10 +47,10 @@ For each tool family:
 Use separate schema definitions for each tool family.
 
 - Charts schema:
-  - `docs/schemas/onyx-charts-openapi.json`
+  - `docs/integrations/onyx/onyx-charts-openapi.json`
   - `https://pipintama.com/docs/pipintama-onyx-charts-openapi.json`
 - Boards schema:
-  - `docs/schemas/onyx-boards-openapi.json`
+  - `docs/integrations/onyx/onyx-boards-openapi.json`
   - `https://pipintama.com/docs/pipintama-onyx-boards-openapi.json`
 
 ## Recommended scope

@@ -25,11 +25,11 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 - `docs/integrations/openwebui.md`: OpenAPI path for OpenWebUI
 - `docs/integrations/openwebui/boards-skill.md`: OpenWebUI Boards skill
 - `docs/integrations/openwebui/charts-skill.md`: OpenWebUI Charts skill
-- `docs/integrations/onyx.md`: validated Onyx flow using focused OpenAPI actions and agent-level enablement
+- `docs/integrations/onyx/README.md`: validated Onyx flow using focused OpenAPI actions and agent-level enablement
+- `docs/integrations/onyx/onyx-charts-openapi.json`: focused Onyx Charts schema
+- `docs/integrations/onyx/onyx-boards-openapi.json`: focused Onyx Boards schema
 - `docs/tools/boards.md`: how Boards works and when to use it
 - `docs/tools/charts.md`: how Charts works and when to use it
-- `docs/schemas/onyx-charts-openapi.json`: focused Onyx Charts schema
-- `docs/schemas/onyx-boards-openapi.json`: focused Onyx Boards schema
 - `skills/pipintama-boards/SKILL.md`: agent skill for hosted boards
 - `skills/pipintama-charts/SKILL.md`: agent skill for hosted charts
 
@@ -84,7 +84,7 @@ If you are wiring OpenWebUI, start with:
 
 If you are wiring Onyx, start with:
 
-- `docs/integrations/onyx.md`
+- `docs/integrations/onyx/README.md`
 
 Then load the matching skill:
 
