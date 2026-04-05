@@ -21,8 +21,8 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 
 - `docs/api/mcp-overview.md`: shared MCP access and tool surface
 - `docs/platform/account-and-api-keys.md`: account and API key prerequisite
-- `docs/integrations/openclaw.md`: ready-to-paste instructions for OpenClaw-like agents
-- `docs/integrations/openwebui.md`: OpenAPI path for OpenWebUI
+- `docs/integrations/openclaw/README.md`: ready-to-paste instructions for OpenClaw-like agents
+- `docs/integrations/openwebui/README.md`: OpenAPI path for OpenWebUI
 - `docs/integrations/openwebui/boards-skill.md`: OpenWebUI Boards skill
 - `docs/integrations/openwebui/charts-skill.md`: OpenWebUI Charts skill
 - `docs/integrations/onyx/README.md`: validated Onyx flow using focused OpenAPI actions and agent-level enablement
@@ -76,11 +76,11 @@ Do not invent unsupported Pipintama URL formats.
 
 If you are wiring an agent such as OpenClaw, start with:
 
-- `docs/integrations/openclaw.md`
+- `docs/integrations/openclaw/README.md`
 
 If you are wiring OpenWebUI, start with:
 
-- `docs/integrations/openwebui.md`
+- `docs/integrations/openwebui/README.md`
 
 If you are wiring Onyx, start with:
 
