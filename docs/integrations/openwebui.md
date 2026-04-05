@@ -42,8 +42,8 @@ Do not mix all Pipintama behavior into one huge prompt.
 
 Use one instruction block or skill per tool:
 
-- `docs/openwebui-boards-skill.md`
-- `docs/openwebui-charts-skill.md`
+- `docs/integrations/openwebui/boards-skill.md`
+- `docs/integrations/openwebui/charts-skill.md`
 
 That reduces fake routes, wrong output formats, and wrong tool selection.
 

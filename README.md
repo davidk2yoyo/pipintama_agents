@@ -19,11 +19,17 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 
 ## Repo structure
 
-- `docs/mcp-overview.md`: shared MCP access and tool surface
-- `docs/openclaw-integration.md`: ready-to-paste instructions for OpenClaw-like agents
-- `docs/openwebui-integration.md`: OpenAPI path for OpenWebUI
-- `docs/onyx-integration.md`: validated Onyx flow using OpenAPI actions and agent-level enablement
-- `docs/charts-overview.md`: how Charts works and when to use it
+- `docs/api/mcp-overview.md`: shared MCP access and tool surface
+- `docs/platform/account-and-api-keys.md`: account and API key prerequisite
+- `docs/integrations/openclaw.md`: ready-to-paste instructions for OpenClaw-like agents
+- `docs/integrations/openwebui.md`: OpenAPI path for OpenWebUI
+- `docs/integrations/openwebui/boards-skill.md`: OpenWebUI Boards skill
+- `docs/integrations/openwebui/charts-skill.md`: OpenWebUI Charts skill
+- `docs/integrations/onyx.md`: validated Onyx flow using focused OpenAPI actions and agent-level enablement
+- `docs/tools/boards.md`: how Boards works and when to use it
+- `docs/tools/charts.md`: how Charts works and when to use it
+- `docs/schemas/onyx-charts-openapi.json`: focused Onyx Charts schema
+- `docs/schemas/onyx-boards-openapi.json`: focused Onyx Boards schema
 - `skills/pipintama-boards/SKILL.md`: agent skill for hosted boards
 - `skills/pipintama-charts/SKILL.md`: agent skill for hosted charts
 
@@ -70,15 +76,15 @@ Do not invent unsupported Pipintama URL formats.
 
 If you are wiring an agent such as OpenClaw, start with:
 
-- `docs/openclaw-integration.md`
+- `docs/integrations/openclaw.md`
 
 If you are wiring OpenWebUI, start with:
 
-- `docs/openwebui-integration.md`
+- `docs/integrations/openwebui.md`
 
 If you are wiring Onyx, start with:
 
-- `docs/onyx-integration.md`
+- `docs/integrations/onyx.md`
 
 Then load the matching skill:
 

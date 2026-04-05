@@ -1,0 +1,196 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Pipintama Boards",
+    "version": "1.0.0",
+    "description": "Create, update, share, fetch, and export hosted Pipintama boards."
+  },
+  "servers": [
+    {
+      "url": "https://api.pipintama.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "CreateBoardRequest": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["mindmap", "flowchart", "kanban", "architecture"]
+          },
+          "sourceText": { "type": "string" },
+          "visibility": {
+            "type": "string",
+            "enum": ["private", "shared", "public"]
+          }
+        },
+        "required": ["title", "type", "sourceText"]
+      },
+      "UpdateBoardRequest": {
+        "type": "object",
+        "properties": {
+          "boardId": { "type": "string" },
+          "title": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["mindmap", "flowchart", "kanban", "architecture"]
+          },
+          "sourceText": { "type": "string" }
+        },
+        "required": ["boardId"]
+      },
+      "ShareBoardRequest": {
+        "type": "object",
+        "properties": {
+          "boardId": { "type": "string" },
+          "visibility": {
+            "type": "string",
+            "enum": ["shared", "public", "private"]
+          }
+        },
+        "required": ["boardId", "visibility"]
+      },
+      "ExportBoardPngRequest": {
+        "type": "object",
+        "properties": {
+          "boardId": { "type": "string" },
+          "theme": {
+            "type": "string",
+            "enum": ["light", "dark"]
+          },
+          "token": { "type": "string" }
+        },
+        "required": ["boardId"]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/openapi/boards/create": {
+      "post": {
+        "operationId": "createBoard",
+        "summary": "Create Board",
+        "description": "Create a hosted Pipintama board and return the viewer URL.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBoardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Board created"
+          }
+        }
+      }
+    },
+    "/openapi/boards/{boardId}": {
+      "get": {
+        "operationId": "getBoard",
+        "summary": "Get Board",
+        "description": "Fetch an existing Pipintama board.",
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Board fetched"
+          }
+        }
+      }
+    },
+    "/openapi/boards/update": {
+      "post": {
+        "operationId": "updateBoard",
+        "summary": "Update Board",
+        "description": "Update an existing Pipintama board.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBoardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Board updated"
+          }
+        }
+      }
+    },
+    "/openapi/boards/share": {
+      "post": {
+        "operationId": "shareBoard",
+        "summary": "Share Board",
+        "description": "Set board visibility and return a tokenized viewer URL when needed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareBoardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Board shared"
+          }
+        }
+      }
+    },
+    "/openapi/boards/export-png": {
+      "post": {
+        "operationId": "exportBoardPng",
+        "summary": "Export Board PNG",
+        "description": "Return a PNG export URL for an existing board.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportBoardPngRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PNG export URL returned"
+          }
+        }
+      }
+    }
+  }
+}

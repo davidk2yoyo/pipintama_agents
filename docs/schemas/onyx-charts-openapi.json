@@ -1,0 +1,226 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Pipintama Charts",
+    "version": "1.0.0",
+    "description": "Create, update, share, fetch, and export hosted Pipintama charts."
+  },
+  "servers": [
+    {
+      "url": "https://api.pipintama.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "ChartData": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "datasets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": { "type": "string" },
+                "data": {
+                  "type": "array",
+                  "items": { "type": "number" }
+                }
+              },
+              "required": ["label", "data"]
+            }
+          }
+        },
+        "required": ["labels", "datasets"]
+      },
+      "CreateChartRequest": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["line", "bar", "pie", "radar"]
+          },
+          "data": {
+            "$ref": "#/components/schemas/ChartData"
+          },
+          "sourceText": { "type": "string" },
+          "visibility": {
+            "type": "string",
+            "enum": ["private", "shared", "public"]
+          }
+        },
+        "required": ["title", "type", "data"]
+      },
+      "UpdateChartRequest": {
+        "type": "object",
+        "properties": {
+          "chartId": { "type": "string" },
+          "title": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["line", "bar", "pie", "radar"]
+          },
+          "data": {
+            "$ref": "#/components/schemas/ChartData"
+          },
+          "sourceText": { "type": "string" }
+        },
+        "required": ["chartId"]
+      },
+      "ShareChartRequest": {
+        "type": "object",
+        "properties": {
+          "chartId": { "type": "string" },
+          "visibility": {
+            "type": "string",
+            "enum": ["shared", "public", "private"]
+          }
+        },
+        "required": ["chartId", "visibility"]
+      },
+      "ExportChartPngRequest": {
+        "type": "object",
+        "properties": {
+          "chartId": { "type": "string" },
+          "theme": {
+            "type": "string",
+            "enum": ["light", "dark"]
+          },
+          "token": { "type": "string" }
+        },
+        "required": ["chartId"]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/openapi/charts/create": {
+      "post": {
+        "operationId": "createChart",
+        "summary": "Create Chart",
+        "description": "Create a hosted Pipintama chart and return the viewer URL.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chart created"
+          }
+        }
+      }
+    },
+    "/openapi/charts/{chartId}": {
+      "get": {
+        "operationId": "getChart",
+        "summary": "Get Chart",
+        "description": "Fetch an existing Pipintama chart.",
+        "parameters": [
+          {
+            "name": "chartId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chart fetched"
+          }
+        }
+      }
+    },
+    "/openapi/charts/update": {
+      "post": {
+        "operationId": "updateChart",
+        "summary": "Update Chart",
+        "description": "Update an existing Pipintama chart.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateChartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chart updated"
+          }
+        }
+      }
+    },
+    "/openapi/charts/share": {
+      "post": {
+        "operationId": "shareChart",
+        "summary": "Share Chart",
+        "description": "Set chart visibility and return a tokenized viewer URL when needed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareChartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chart shared"
+          }
+        }
+      }
+    },
+    "/openapi/charts/export-png": {
+      "post": {
+        "operationId": "exportChartPng",
+        "summary": "Export Chart PNG",
+        "description": "Return a PNG export URL for an existing chart.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportChartPngRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PNG export URL returned"
+          }
+        }
+      }
+    }
+  }
+}
