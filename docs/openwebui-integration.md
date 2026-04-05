@@ -10,6 +10,12 @@ Authenticate with:
 
 - `Authorization: Bearer <PIPINTAMA_API_KEY>`
 
+## Before OpenWebUI setup
+
+1. Create a Pipintama account
+2. Generate a Pipintama API key in the platform
+3. Use that key in the OpenWebUI tool server config
+
 ## Recommended split
 
 - `OpenClaw` and `Claude Code`: use the hosted MCP endpoint

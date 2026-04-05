@@ -50,6 +50,7 @@ Use `Charts` when the agent needs:
 
 The hosted MCP is not anonymous.
 
+- users should create a Pipintama account and generate their own API key first
 - clients authenticate with a Pipintama API key
 - use `Authorization: Bearer <key>` or `x-api-key`
 - usage is attributed to the authenticated client and workspace

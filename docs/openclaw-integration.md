@@ -8,6 +8,7 @@ OpenClaw should use Pipintama through the hosted MCP endpoint, not through hardc
 
 Give OpenClaw:
 
+0. A Pipintama user account that has already created an API key
 1. MCP access to `https://api.pipintama.com/mcp`
 2. the Pipintama skills from:
    - `skills/pipintama-boards/SKILL.md`
