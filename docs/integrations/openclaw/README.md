@@ -13,6 +13,7 @@ Give OpenClaw:
 2. the Pipintama skills from:
    - `skills/pipintama-boards/SKILL.md`
    - `skills/pipintama-charts/SKILL.md`
+   - `skills/pipintama-maps/SKILL.md`
 3. a valid Pipintama API key supplied through `Authorization: Bearer <key>` or `x-api-key`
 
 The public docs can be used as reference, but the skill should drive behavior.
@@ -30,6 +31,7 @@ https://api.pipintama.com/mcp
 Skill reference:
 https://pipintama.com/docs/pipintama-boards-skill.md
 https://pipintama.com/docs/pipintama-charts-spec.md
+https://pipintama.com/docs/pipintama-maps-skill.md
 
 Authentication:
 Send a valid Pipintama API key with each MCP request.
@@ -53,6 +55,14 @@ Use Pipintama Charts when the user asks for:
 - AI data visualization
 - visual comparisons of quantitative values
 
+Use Pipintama Maps when the user asks for:
+- country maps
+- city markers
+- departments, states, or provinces
+- highlighted countries
+- highlighted regions
+- geographic coverage
+
 Preferred behavior:
 - choose the correct Pipintama tool first
 - choose the correct mode within that tool
@@ -71,7 +81,7 @@ Do not fall back to markdown diagrams, ASCII diagrams, or fake chart URLs unless
 
 When a user asks for a visual structure or quantitative chart, OpenClaw should:
 
-1. decide whether the request fits Boards or Charts
+1. decide whether the request fits Boards, Charts, or Maps
 2. choose the correct mode
 3. call the matching create or update tool
 4. return the hosted viewer URL
@@ -118,6 +128,8 @@ Only return URL formats that Pipintama actually serves today:
 - PNG: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
 - chart viewer: `https://pipintama.com/charts/<chart-id>` or `?t=<share-token>`
 - chart PNG: `https://api.pipintama.com/mcp-chart-exports/<chart-id>.png?theme=light`
+- map viewer: `https://pipintama.com/maps/<map-id>?t=<share-token>`
+- map PNG: `https://api.pipintama.com/mcp-map-exports/<map-id>.png?theme=light&token=<share-token>`
 
 Do not invent or rewrite these into other domains or routes.
 

@@ -44,6 +44,7 @@ Use one instruction block or skill per tool:
 
 - `docs/integrations/openwebui/boards-skill.md`
 - `docs/integrations/openwebui/charts-skill.md`
+- `docs/integrations/openwebui/maps-skill.md`
 
 That reduces fake routes, wrong output formats, and wrong tool selection.
 
@@ -66,6 +67,15 @@ Charts:
 - `POST /openapi/charts/update`
 - `POST /openapi/charts/share`
 - `POST /openapi/charts/export-png`
+
+Maps:
+
+- `GET /openapi/maps/modes`
+- `POST /openapi/maps/create`
+- `GET /openapi/maps/{geoMapId}`
+- `POST /openapi/maps/update`
+- `POST /openapi/maps/share`
+- `POST /openapi/maps/export-png`
 
 ## Workspace rule
 
@@ -93,8 +103,17 @@ Use `Charts` for:
 - category comparison
 - distributions
 
+Use `Maps` for:
+
+- country maps
+- city markers
+- departments, states, or provinces
+- language-region maps
+- geographic coverage
+
 ## Troubleshooting
 
 - If OpenWebUI MCP says it is trying to connect to an `openAPI tool server`, use the OpenAPI path instead of the MCP path.
 - If the request returns `401`, verify the Bearer API key.
 - If a board or chart does not show in `/platform`, confirm the request used the API key from that user's workspace.
+- If a city map fails in OpenWebUI, force structured fields such as `type=city_markers`, `countryName`, and `cityNames`.

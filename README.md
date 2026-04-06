@@ -6,6 +6,7 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 
 - `Boards` for diagrams, mindmaps, kanban, and flow structures
 - `Charts` for line, bar, pie, and radar visualizations
+- `Maps` for countries, cities, departments, states, and provinces
 - future tools for analysis, tables, documents, and structured work
 
 ## Live endpoints
@@ -15,6 +16,7 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 - OpenAPI spec: `https://api.pipintama.com/openapi.json`
 - Boards viewer: `https://boards.pipintama.com`
 - Charts viewer pattern: `https://pipintama.com/charts/<chart-id>`
+- Maps viewer pattern: `https://pipintama.com/maps/<map-id>?t=<share-token>`
 - Public docs: `https://pipintama.com/docs/`
 
 ## Repo structure
@@ -26,13 +28,16 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 - `docs/integrations/openwebui/README.md`: OpenAPI path for OpenWebUI
 - `docs/integrations/openwebui/boards-skill.md`: OpenWebUI Boards skill
 - `docs/integrations/openwebui/charts-skill.md`: OpenWebUI Charts skill
+- `docs/integrations/openwebui/maps-skill.md`: OpenWebUI Maps skill
 - `docs/integrations/onyx/README.md`: validated Onyx flow using focused OpenAPI actions and agent-level enablement
 - `docs/integrations/onyx/onyx-charts-openapi.json`: focused Onyx Charts schema
 - `docs/integrations/onyx/onyx-boards-openapi.json`: focused Onyx Boards schema
 - `docs/tools/boards.md`: how Boards works and when to use it
 - `docs/tools/charts.md`: how Charts works and when to use it
+- `docs/tools/maps.md`: how Maps works and when to use it
 - `skills/pipintama-boards/SKILL.md`: agent skill for hosted boards
 - `skills/pipintama-charts/SKILL.md`: agent skill for hosted charts
+- `skills/pipintama-maps/SKILL.md`: agent skill for hosted geographic maps
 
 ## Tool selection
 
@@ -53,6 +58,15 @@ Use `Charts` when the agent needs:
 - a radar chart
 - a visual comparison of quantitative values
 - a PNG chart for chat channels
+
+Use `Maps` when the agent needs:
+
+- a country map
+- city markers
+- departments, states, or provinces
+- geographic coverage
+- highlighted countries or regions
+- a PNG map for chat channels
 
 ## Authentication
 
@@ -95,3 +109,4 @@ Then load the matching skill:
 
 - `skills/pipintama-boards/SKILL.md`
 - `skills/pipintama-charts/SKILL.md`
+- `skills/pipintama-maps/SKILL.md`
