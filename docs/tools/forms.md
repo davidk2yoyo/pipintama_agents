@@ -16,10 +16,52 @@ It is the right tool when an agent needs to:
 - `poll`: one-question voting, option selection, optional name/email/comment capture
 - `survey`: multi-question feedback, ratings, and written opinions
 
+## Flow
+
+1. Create the form from MCP or OpenAPI
+2. Share the public form URL
+3. Collect responses on the hosted form page
+4. Review results in the owner-only results page or fetch responses through MCP/OpenAPI
+
 ## URLs
 
 - Form URL: `https://pipintama.com/forms/<form-id>?t=<share-token>`
 - Results URL: `https://pipintama.com/forms/<form-id>/results/`
+
+## Typical fields
+
+Poll:
+
+- `title`
+- `question`
+- `options`
+- optional `collectName`
+- optional `collectEmail`
+- optional `collectComment`
+
+Survey:
+
+- `title`
+- multiple questions
+- ratings
+- written feedback
+
+Form:
+
+- `title`
+- `name`
+- `email`
+- `company`
+- `project type`
+- `budget`
+- `timeline`
+- `notes`
+
+## Results
+
+- humans can review results in the owner-only results page
+- agents can fetch responses through MCP `list_form_responses`
+- OpenAPI clients can fetch responses through `GET /openapi/forms/{formId}/responses`
 
 ## Notes
 
