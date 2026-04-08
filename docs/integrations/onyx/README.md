@@ -25,6 +25,16 @@ The reliable path in Onyx was:
 - Hosted viewer URLs returned in chat
 - PNG URLs returned in chat
 
+## Forms and Maps note
+
+Forms and Maps should follow the same focused OpenAPI-action pattern in Onyx:
+
+- create a focused OpenAPI action for that one tool family
+- authenticate it with a real Pipintama API key
+- enable it on the target agent
+
+Use that path instead of assuming one giant mixed action will route well.
+
 ## Important behavior
 
 Connecting the Pipintama MCP server in Onyx can expose tools and action discovery, but that alone did not guarantee successful chat execution.
@@ -61,6 +71,11 @@ Use separate actions or at least clearly separated tool families:
 - `Pipintama Boards`
 
 That keeps the action surface easier for the agent to use correctly.
+
+For Forms, the same principle applies:
+
+- use a focused Forms action if you want polls, surveys, intake forms, and response reading
+- keep response collection and response reading in the same workspace
 
 ## Workspace rule
 

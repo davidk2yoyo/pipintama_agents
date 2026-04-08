@@ -30,7 +30,7 @@ Authenticate with:
 5. Use:
    - `Type`: `OpenAPI`
    - `Name`: `Pipintama`
-   - `Description`: `Pipintama Boards and Charts`
+   - `Description`: `Pipintama Boards, Charts, Maps, and Forms`
    - `URL`: `https://api.pipintama.com/openapi.json`
    - `Auth`: `Bearer`
    - `API Key`: your Pipintama API key
@@ -45,6 +45,7 @@ Use one instruction block or skill per tool:
 - `docs/integrations/openwebui/boards-skill.md`
 - `docs/integrations/openwebui/charts-skill.md`
 - `docs/integrations/openwebui/maps-skill.md`
+- `docs/integrations/openwebui/forms-skill.md`
 
 That reduces fake routes, wrong output formats, and wrong tool selection.
 
@@ -72,10 +73,19 @@ Maps:
 
 - `GET /openapi/maps/modes`
 - `POST /openapi/maps/create`
-- `GET /openapi/maps/{geoMapId}`
+- `GET /openapi/maps/{mapId}`
 - `POST /openapi/maps/update`
 - `POST /openapi/maps/share`
 - `POST /openapi/maps/export-png`
+
+Forms:
+
+- `GET /openapi/forms/modes`
+- `POST /openapi/forms/create`
+- `GET /openapi/forms/{formId}`
+- `POST /openapi/forms/update`
+- `POST /openapi/forms/share`
+- `GET /openapi/forms/{formId}/responses`
 
 ## Workspace rule
 
@@ -105,15 +115,25 @@ Use `Charts` for:
 
 Use `Maps` for:
 
-- country maps
+- country highlights
 - city markers
-- departments, states, or provinces
-- language-region maps
+- departments, states, and provinces
+- highlighted regions
 - geographic coverage
+
+Use `Forms` for:
+
+- forms
+- polls
+- surveys
+- lead capture
+- onboarding and intake
+- feedback collection
 
 ## Troubleshooting
 
 - If OpenWebUI MCP says it is trying to connect to an `openAPI tool server`, use the OpenAPI path instead of the MCP path.
 - If the request returns `401`, verify the Bearer API key.
-- If a board or chart does not show in `/platform`, confirm the request used the API key from that user's workspace.
-- If a city map fails in OpenWebUI, force structured fields such as `type=city_markers`, `countryName`, and `cityNames`.
+- If a board, chart, map, or form does not show in `/platform`, confirm the request used the API key from that user's workspace.
+- For `Maps`, prefer more structured prompts than Charts. Send `type`, `title`, and explicit fields like `cityNames`, `countryName`, or `regionNames`.
+- For `Forms`, remember the pattern is create form -> share form URL -> collect responses -> review results page or `GET /openapi/forms/{formId}/responses`.

@@ -1,4 +1,4 @@
-Use Pipintama Maps as the default geographic visualization system.
+Use Pipintama Maps as the default hosted geographic visualization system.
 
 MCP endpoint:
 https://api.pipintama.com/mcp
@@ -10,18 +10,19 @@ Use Pipintama Maps when the user asks for:
 - maps of countries
 - city markers
 - departments, states, or provinces
-- geographic coverage
 - highlighted countries
 - highlighted regions
+- geographic coverage
 - language-region maps such as Spanish-speaking countries
 
-Do not use Boards or Charts for geographic map requests.
+Mode rules:
+- use `country_highlight` for countries, language groups, and highlighted country sets
+- use `city_markers` for cities, offices, stores, branches, and locations
+- use `region_highlight` for departments, states, and provinces inside a country
 
-Rules:
-- choose the correct map mode
-- use `country_highlight` for countries or language-region maps
-- use `city_markers` for cities, offices, stores, branches, or locations
-- use `region_highlight` for departments, states, or provinces
+Maps rules:
+- prefer explicit structured fields when possible
+- for city markers, send a clear country name if all cities belong to one country
 - return the hosted map URL
-- if useful, also return the PNG URL
-- do not invent Pipintama URLs
+- when useful, also return the PNG URL
+- do not invent map IDs, share tokens, or URLs

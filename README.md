@@ -7,6 +7,7 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 - `Boards` for diagrams, mindmaps, kanban, and flow structures
 - `Charts` for line, bar, pie, and radar visualizations
 - `Maps` for countries, cities, departments, states, and provinces
+- `Forms` for polls, surveys, intake forms, and shared response collection
 - future tools for analysis, tables, documents, and structured work
 
 ## Live endpoints
@@ -17,6 +18,7 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 - Boards viewer: `https://boards.pipintama.com`
 - Charts viewer pattern: `https://pipintama.com/charts/<chart-id>`
 - Maps viewer pattern: `https://pipintama.com/maps/<map-id>?t=<share-token>`
+- Forms viewer pattern: `https://pipintama.com/forms/<form-id>?t=<share-token>`
 - Public docs: `https://pipintama.com/docs/`
 
 ## Repo structure
@@ -30,15 +32,18 @@ Pipintama lets an AI agent turn plain text into useful outputs by calling the ri
 - `docs/integrations/openwebui/boards-skill.md`: OpenWebUI Boards skill
 - `docs/integrations/openwebui/charts-skill.md`: OpenWebUI Charts skill
 - `docs/integrations/openwebui/maps-skill.md`: OpenWebUI Maps skill
+- `docs/integrations/openwebui/forms-skill.md`: OpenWebUI Forms skill
 - `docs/integrations/onyx/README.md`: validated Onyx flow using focused OpenAPI actions and agent-level enablement
 - `docs/integrations/onyx/onyx-charts-openapi.json`: focused Onyx Charts schema
 - `docs/integrations/onyx/onyx-boards-openapi.json`: focused Onyx Boards schema
 - `docs/tools/boards.md`: how Boards works and when to use it
 - `docs/tools/charts.md`: how Charts works and when to use it
 - `docs/tools/maps.md`: how Maps works and when to use it
+- `docs/tools/forms.md`: how Forms works and when to use it
 - `skills/pipintama-boards/SKILL.md`: agent skill for hosted boards
 - `skills/pipintama-charts/SKILL.md`: agent skill for hosted charts
-- `skills/pipintama-maps/SKILL.md`: agent skill for hosted geographic maps
+- `skills/pipintama-maps/SKILL.md`: agent skill for hosted maps
+- `skills/pipintama-forms/SKILL.md`: agent skill for hosted forms
 
 ## Tool selection
 
@@ -68,6 +73,14 @@ Use `Maps` when the agent needs:
 - geographic coverage
 - highlighted countries or regions
 - a PNG map for chat channels
+
+Use `Forms` when the agent needs:
+
+- a poll
+- a survey
+- a lead capture form
+- onboarding or intake questions
+- shared responses and results
 
 ## Authentication
 
@@ -115,3 +128,4 @@ Then load the matching skill:
 - `skills/pipintama-boards/SKILL.md`
 - `skills/pipintama-charts/SKILL.md`
 - `skills/pipintama-maps/SKILL.md`
+- `skills/pipintama-forms/SKILL.md`

@@ -73,6 +73,23 @@ Use Pipintama Maps when the user asks for:
 - geographic coverage
 - language-region maps such as Spanish-speaking countries
 
+Use Pipintama Forms when the user asks for:
+- forms
+- polls
+- surveys
+- lead capture
+- onboarding questionnaires
+- feedback collection
+- event RSVP or request intake
+
+Forms rules:
+- use poll for one-question voting
+- use survey for multi-question feedback
+- use form for intake and operational data collection
+- polls can optionally collect name, email, and comment
+- return the hosted form URL
+- when the user asks for results, fetch the form responses from the same workspace and summarize them
+
 Tool rules:
 - choose the correct Pipintama tool family first
 - then choose the correct mode inside that tool

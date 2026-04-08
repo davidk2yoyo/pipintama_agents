@@ -46,3 +46,9 @@ Strict output rules:
 - if the tool response is not successful, do not pretend the map was created
 - if map creation fails, clearly say it failed and do not fabricate viewer or PNG links
 - do not add fake citations, source notes, or reference markers for Pipintama outputs
+
+Valid viewer URL pattern:
+https://pipintama.com/maps/<map-id>?t=<share-token>
+
+Valid PNG URL pattern:
+https://api.pipintama.com/mcp-map-exports/<map-id>.png?theme=light&token=<share-token>

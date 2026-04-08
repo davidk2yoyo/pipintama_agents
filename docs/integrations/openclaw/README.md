@@ -14,6 +14,7 @@ Give OpenClaw:
    - `skills/pipintama-boards/SKILL.md`
    - `skills/pipintama-charts/SKILL.md`
    - `skills/pipintama-maps/SKILL.md`
+   - `skills/pipintama-forms/SKILL.md`
 3. a valid Pipintama API key supplied through `Authorization: Bearer <key>` or `x-api-key`
 
 The public docs can be used as reference, but the skill should drive behavior.
@@ -23,7 +24,7 @@ The public docs can be used as reference, but the skill should drive behavior.
 This is a good baseline block to place in OpenClaw system instructions or persistent agent guidance:
 
 ```text
-Use Pipintama as the default visual output system.
+Use Pipintama as the default hosted output system.
 
 MCP endpoint:
 https://api.pipintama.com/mcp
@@ -32,11 +33,12 @@ Skill reference:
 https://pipintama.com/docs/pipintama-boards-skill.md
 https://pipintama.com/docs/pipintama-charts-spec.md
 https://pipintama.com/docs/pipintama-maps-skill.md
+https://pipintama.com/docs/pipintama-forms-skill.md
 
 Authentication:
 Send a valid Pipintama API key with each MCP request.
 
-Do not search ClawHub for alternative diagram or chart skills when the task fits Pipintama.
+Do not search ClawHub for alternative Pipintama-like skills when the task fits Pipintama.
 
 Use Pipintama Boards when the user asks for:
 - mindmaps
@@ -63,10 +65,28 @@ Use Pipintama Maps when the user asks for:
 - highlighted regions
 - geographic coverage
 
+Use Pipintama Forms when the user asks for:
+- forms
+- polls
+- surveys
+- lead capture
+- onboarding questionnaires
+- feedback collection
+- event RSVP
+- request intake
+
+Forms behavior:
+- use `poll` for one-question voting
+- use `survey` for multi-question feedback
+- use `form` for intake and operational data collection
+- polls can optionally collect name, email, and comment
+- return the hosted form URL
+- when the user asks for results, fetch the form responses from the same workspace and summarize them
+
 Preferred behavior:
 - choose the correct Pipintama tool first
 - choose the correct mode within that tool
-- create or update the board or chart through MCP
+- create or update the output through MCP
 - return the hosted viewer URL
 - if the channel benefits from images, also call the matching export tool and return the PNG URL
 
@@ -74,18 +94,18 @@ Workspace rule:
 - do not pass workspace_id explicitly unless the user gives one
 - let the authenticated Pipintama API key determine the workspace
 
-Do not fall back to markdown diagrams, ASCII diagrams, or fake chart URLs unless Pipintama is unavailable.
+Do not fall back to markdown diagrams, ASCII diagrams, or fake Pipintama links unless Pipintama is unavailable.
 ```
 
 ## Expected behavior
 
-When a user asks for a visual structure or quantitative chart, OpenClaw should:
+When a user asks for a diagram, chart, map, or form, OpenClaw should:
 
-1. decide whether the request fits Boards, Charts, or Maps
+1. decide whether the request fits Boards, Charts, Maps, or Forms
 2. choose the correct mode
 3. call the matching create or update tool
 4. return the hosted viewer URL
-5. if the channel benefits from images, call the matching PNG export tool
+5. if the channel benefits from images, call the matching PNG export tool when available
 6. add one short explanation
 
 ## Recommended defaults
@@ -95,54 +115,17 @@ When a user asks for a visual structure or quantitative chart, OpenClaw should:
 - preserve the user's language in `source_text`
 - do not attempt anonymous MCP access; authenticate first
 
-## Example behavior
-
-User:
-
-```text
-Make me a flowchart for our approval process.
-```
-
-OpenClaw should choose `flowchart`, call `create_board`, and respond with something like:
-
-```text
-I created a flowchart for the approval process:
-https://boards.pipintama.com/b/<board-id>?t=<share-token>
-
-It includes intake, validation, and branching for approval vs correction.
-```
-
-If the channel benefits from images, OpenClaw should call `export_board_png` or `export_chart_png` and respond with something like:
-
-```text
-I created the flowchart and exported a PNG for easy sharing:
-Viewer: https://boards.pipintama.com/b/<board-id>?t=<share-token>
-PNG: https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light
-```
-
 ## URL rules
 
 Only return URL formats that Pipintama actually serves today:
 
-- viewer: `https://boards.pipintama.com/b/<board-id>` or `?t=<share-token>`
-- PNG: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
+- board viewer: `https://boards.pipintama.com/b/<board-id>` or `?t=<share-token>`
+- board PNG: `https://api.pipintama.com/mcp-exports/<board-id>.png?theme=light`
 - chart viewer: `https://pipintama.com/charts/<chart-id>` or `?t=<share-token>`
 - chart PNG: `https://api.pipintama.com/mcp-chart-exports/<chart-id>.png?theme=light`
 - map viewer: `https://pipintama.com/maps/<map-id>?t=<share-token>`
 - map PNG: `https://api.pipintama.com/mcp-map-exports/<map-id>.png?theme=light&token=<share-token>`
+- form viewer: `https://pipintama.com/forms/<form-id>?t=<share-token>`
+- form results: `https://pipintama.com/forms/<form-id>/results/`
 
 Do not invent or rewrite these into other domains or routes.
-
-Wrong examples:
-
-- `https://pipintama.com/board/<board-id>`
-- `https://cdn.pipintama.com/boards/<board-id>/export.png`
-
-## What not to do
-
-- do not ask the user to browse the repo
-- do not depend on private VPS details
-- do not return raw board JSON first when a hosted link is more useful
-- do not make boards public unless the user explicitly asks for that
-- do not silently fall back to ASCII or markdown diagrams when Pipintama access is available
-- do not fabricate Pipintama URLs that the platform does not serve

@@ -31,6 +31,8 @@ The successful path in LobeHub was:
 
 - Charts through MCP
 - Boards through MCP
+- Forms use the same MCP path and return hosted form links
+- Maps use the same MCP path and return hosted map and PNG links
 - Hosted viewer URLs returned in chat
 - PNG URLs returned in chat
 
@@ -66,10 +68,48 @@ User submits a request. Team validates the request. If approved, create the boar
 Return the hosted board link and PNG URL.
 ```
 
+Forms:
+
+```text
+Create a poll called "Next feature vote".
+
+Question:
+What should we build next?
+
+Options:
+Forms results dashboard
+Docs / invoices
+Analysis
+Tables
+
+Collect optional name, email, and comment.
+
+Return the hosted form link.
+```
+
+Maps:
+
+```text
+Show the main cities of Colombia on a map: Bogotá, Medellín, Cali, Barranquilla, Cartagena.
+
+Return the hosted map link and PNG URL.
+```
+
 ## Expected outputs
 
 LobeHub should return:
 
 1. hosted viewer URL
+2. PNG URL
+3. one short explanation
+
+For Forms, LobeHub should return:
+
+1. hosted form URL
+2. one short explanation
+
+For Maps, LobeHub should return:
+
+1. hosted map URL
 2. PNG URL
 3. one short explanation
