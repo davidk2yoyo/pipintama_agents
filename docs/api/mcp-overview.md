@@ -1,6 +1,6 @@
 # Pipintama MCP Overview
 
-Pipintama exposes one hosted MCP endpoint that currently serves both `Boards` and `Charts`.
+Pipintama exposes one hosted MCP endpoint that currently serves `Boards`, `Charts`, `Maps`, and `Forms`.
 
 For clients that behave more reliably with OpenAPI than MCP, Pipintama also exposes:
 
@@ -148,6 +148,104 @@ Output shape:
 }
 ```
 
+### Map tools
+
+### `list_map_modes`
+
+Return the supported map types and when to use each one.
+
+### `create_map`
+
+Create a map from structured geography inputs and return a hosted viewer URL.
+
+Input shape:
+
+```json
+{
+  "title": "Colombia Main Cities",
+  "map_type": "city_markers",
+  "country_name": "Colombia",
+  "city_names": ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena"],
+  "visibility": "shared"
+}
+```
+
+### `get_map`
+
+Fetch map metadata, geometry references, and hosted viewer URL.
+
+### `share_map`
+
+Switch a map into shared mode and return the tokenized viewer URL.
+
+### `set_map_visibility`
+
+Change a map to `private`, `shared`, or `public`.
+
+### `update_map`
+
+Refine an existing map without creating a new map id.
+
+### `export_map_png`
+
+Return a PNG export URL when the channel needs an image as well as a hosted link.
+
+Output shape:
+
+```json
+{
+  "ok": true,
+  "map_id": "cmnmj209w0005nu01qnvzz2cm",
+  "viewer_url": "https://pipintama.com/maps/cmnmj209w0005nu01qnvzz2cm?t=<share-token>",
+  "png_url": "https://api.pipintama.com/mcp-map-exports/cmnmj209w0005nu01qnvzz2cm.png?theme=light&token=<share-token>",
+  "theme": "light"
+}
+```
+
+### Form tools
+
+### `list_form_modes`
+
+Return the supported form types and when to use each one.
+
+### `create_form`
+
+Create a hosted form, poll, or survey and return a hosted form URL.
+
+Input shape:
+
+```json
+{
+  "title": "Next Feature Vote",
+  "form_type": "poll",
+  "source_text": "Question: What should we build next? Options: Forms results dashboard, Docs / invoices, Analysis, Tables.",
+  "visibility": "shared",
+  "collect_name": true,
+  "collect_email": true,
+  "collect_comment": true
+}
+```
+
+### `get_form`
+
+Fetch form metadata, schema, and hosted viewer URL.
+
+### `share_form`
+
+Switch a form into shared mode and return the tokenized viewer URL.
+
+### `set_form_visibility`
+
+Change a form to `private`, `shared`, or `public`.
+
+### `update_form`
+
+Refine an existing form without creating a new form id.
+
+### `list_form_responses`
+
+Fetch responses for an existing form so the agent can summarize votes, comments, or structured answers.
+
 ## Board modes
 
 - `mindmap`: concepts, brainstorming, topic exploration
@@ -161,6 +259,18 @@ Output shape:
 - `bar`: category comparison
 - `pie`: part-to-whole distribution
 - `radar`: multidimensional profile comparison
+
+## Map modes
+
+- `country_highlight`: countries, language groups, highlighted country sets
+- `city_markers`: cities, offices, stores, branches, and precise locations
+- `region_highlight`: departments, states, and provinces inside a country
+
+## Form modes
+
+- `form`: intake, onboarding, lead capture, and request collection
+- `poll`: one-question voting with optional name, email, and comment
+- `survey`: multi-question feedback with ratings and text answers
 
 ## Visibility guidance
 
